@@ -64,4 +64,38 @@ class CloudABISAPI {
             throw new Exception("Experiencing technical difficaulties!");
         }
     }
+
+    function IsRegister()
+    {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $this->_apiBaseUrl . "api/Biometric/IsRegistered",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => "{\r\n  \"CustomerKey\": \"$this->_customerKey\",\r\n  \"EngineName\": \"$this->_engineName\",\r\n  \"RegistrationID\": \"$id\"\r\n}",
+            CURLOPT_HTTPHEADER => array(
+                "authorization: Bearer $token",
+                "cache-control: no-cache",
+                "content-type: application/json",
+                "postman-token: f33d9566-866e-d6f9-5b85-bb5eabd25da5"
+                ),
+            )
+        );
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            return "cURL Error #:" . $err;
+        } else {
+            return $response;
+        }
+    }
 }
