@@ -13,10 +13,10 @@ class CloudABISAPI {
     private $_apiBaseUrl = "";
 
     // Construct Api Manager
-    function __construct($appKey="", $secretKey="", $apiBaseUrl="")
+    function __construct($appKey, $secretKey, $apiBaseUrl)
     {
         $this->_appKey = $appKey;
-        $this->_secrectKey = $secretKey;
+        $this->_secretKey = $secretKey;
         $this->_apiBaseUrl = $apiBaseUrl;
 
         if ( $this->_apiBaseUrl == "" || is_null($this->_apiBaseUrl) )
