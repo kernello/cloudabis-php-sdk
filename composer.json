@@ -9,7 +9,7 @@
     },
     "autoload": {
         "psr-4": {
-            "cloudabis_sdk\\": "src/"
+            "cloudabis_sdk\\": "src/CloudABIS-SDK"
         }
     }
 }
