@@ -41,7 +41,7 @@ class CloudABISAPI {
                 CURLOPT_TIMEOUT => 30,
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                 CURLOPT_CUSTOMREQUEST => "POST",
-                CURLOPT_POSTFIELDS => "username=".$this->_appkey."&password=".urlencode($this->_secretKey)."&grant_type=password",
+                CURLOPT_POSTFIELDS => "username=".$this->_appKey."&password=".urlencode($this->_secretKey)."&grant_type=password",
                 CURLOPT_HTTPHEADER => array(
                     "cache-control: no-cache",
                     "content-type: application/x-www-form-urlencoded",
