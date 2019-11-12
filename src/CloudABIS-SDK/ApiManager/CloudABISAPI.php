@@ -65,8 +65,12 @@ class CloudABISAPI {
         }
     }
 
-    function IsRegister()
+    function IsRegistered($biometricRequest)
     {
+        $id = $biometricRequest->RegistrationID;
+        $engineName = $biometricRequest->EngineName;
+        $customerKey = $biometricRequest->CustomerKey;
+        $token = $biometricRequest->Token;
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
@@ -77,7 +81,7 @@ class CloudABISAPI {
             CURLOPT_TIMEOUT => 30,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => "{\r\n  \"CustomerKey\": \"$this->_customerKey\",\r\n  \"EngineName\": \"$this->_engineName\",\r\n  \"RegistrationID\": \"$id\"\r\n}",
+            CURLOPT_POSTFIELDS => "{\r\n  \"CustomerKey\": \"$customerKey\",\r\n  \"EngineName\": \"$engineName\",\r\n  \"RegistrationID\": \"$id\"\r\n}",
             CURLOPT_HTTPHEADER => array(
                 "authorization: Bearer $token",
                 "cache-control: no-cache",
