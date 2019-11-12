@@ -1,5 +1,5 @@
 <?php 
-namespace cloudabis_sdk;
+namespace cloudabis_sdk\ApiManager;
 
 /**
  * API Manager
