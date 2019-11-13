@@ -13,7 +13,7 @@ class CloudABISAPI {
     private $_apiBaseUrl = "";
 
     // Construct Api Manager
-    function __construct($appKey, $secretKey, $apiBaseUrl)
+    public function __construct($appKey, $secretKey, $apiBaseUrl)
     {
         $this->_appKey = $appKey;
         $this->_secretKey = $secretKey;
@@ -29,7 +29,7 @@ class CloudABISAPI {
     /**
      * Returns API token object if given app key, secret key is correct otherwise return the proper reason
      */
-    function GetToken()
+    public function GetToken()
     {
         try {
             $curl = curl_init();
@@ -65,12 +65,13 @@ class CloudABISAPI {
         }
     }
 
-    function IsRegistered($biometricRequest)
+    public function IsRegistered($biometricRequest)
     {
         $id = $biometricRequest->RegistrationID;
         $engineName = $biometricRequest->EngineName;
         $customerKey = $biometricRequest->CustomerKey;
         $token = $biometricRequest->Token;
+
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
@@ -90,6 +91,46 @@ class CloudABISAPI {
                 ),
             )
         );
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            return "cURL Error #:" . $err;
+        } else {
+            return $response;
+        }
+    }
+
+    public function Register($biometricRequest)
+    {
+        $registrationid = $biometricRequest->RegistrationID;
+        $engineName = $biometricRequest->EngineName;
+        $customerKey = $biometricRequest->CustomerKey;
+        $format = $biometricRequest->Format;
+        $biometricXml = $biometricRequest->BiometricXml;
+        $token = $biometricRequest->Token;
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $this->_apiBaseUrl . "api/Biometric/Register",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => "{\r\n  \"CustomerKey\": \"$customerKey\",\r\n  \"EngineName\": \"$engineName\",\r\n  \"RegistrationID\": \"$registrationid\",\r\n  \"Format\": \"$format\",\r\n  \"BiometricXml\": \"$biometricXml\"\r\n}",
+            CURLOPT_HTTPHEADER => array(
+                "authorization: Bearer $token",
+                "cache-control: no-cache",
+                "content-type: application/json",
+                "postman-token: 2f03c3f1-3cb4-796f-096f-fdf87126e8c8",
+            ),
+        ));
 
         $response = curl_exec($curl);
         $err = curl_error($curl);
