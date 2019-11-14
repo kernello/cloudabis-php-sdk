@@ -222,4 +222,42 @@ class CloudABISAPI {
             return $response;
         }
     }
+
+    public function RemoveID($biometricRequest)
+    {
+        $id = $biometricRequest->RegistrationID;
+        $engineName = $biometricRequest->EngineName;
+        $customerKey = $biometricRequest->CustomerKey;
+        $token = $biometricRequest->Token;
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => $this->_apiBaseUrl . "api/Biometric/RemoveID",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "POST",
+        CURLOPT_POSTFIELDS => "{\r\n  \"CustomerKey\": \"$customerKey\",\r\n  \"EngineName\": \"$engineName\",\r\n  \"RegistrationID\": \"$id\"\r\n}",
+        CURLOPT_HTTPHEADER => array(
+            "authorization: Bearer $token",
+            "cache-control: no-cache",
+            "content-type: application/json",
+            "postman-token: 4679e34d-f18e-59e8-79ef-5e8241008796"
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            return "cURL Error #:" . $err;
+        } else {
+            return $response;
+        }
+    }
 }
