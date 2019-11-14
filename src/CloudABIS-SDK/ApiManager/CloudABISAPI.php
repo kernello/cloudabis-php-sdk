@@ -187,10 +187,9 @@ class CloudABISAPI {
     public function ChangeID($biometricRequest)
     {
         $registrationid = $biometricRequest->RegistrationID;
+        $NewRegistrationID = $biometricRequest->NewRegistrationID;
         $engineName = $biometricRequest->EngineName;
         $customerKey = $biometricRequest->CustomerKey;
-        $format = $biometricRequest->Format;
-        $biometricXml = $biometricRequest->BiometricXml;
         $token = $biometricRequest->Token;
 
         $curl = curl_init();
@@ -203,7 +202,7 @@ class CloudABISAPI {
         CURLOPT_TIMEOUT => 30,
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => "POST",
-        CURLOPT_POSTFIELDS => "{\r\n  \"CustomerKey\": \"$customerKey\",\r\n  \"EngineName\": \"$engineName\",\r\n  \"RegistrationID\": \"$oldID\",\r\n  \"NewRegistrationID\":\"$newID\"\r\n}",
+        CURLOPT_POSTFIELDS => "{\r\n  \"CustomerKey\": \"$customerKey\",\r\n  \"EngineName\": \"$engineName\",\r\n  \"RegistrationID\": \"$registrationid\",\r\n  \"NewRegistrationID\":\"$NewRegistrationID\"\r\n}",
         CURLOPT_HTTPHEADER => array(
             "authorization: Bearer $token",
             "cache-control: no-cache",
