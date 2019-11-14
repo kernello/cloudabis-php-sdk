@@ -143,4 +143,44 @@ class CloudABISAPI {
             return $response;
         }
     }
+
+    public function Verify($biometricRequest)
+    {
+        $registrationid = $biometricRequest->RegistrationID;
+        $engineName = $biometricRequest->EngineName;
+        $customerKey = $biometricRequest->CustomerKey;
+        $format = $biometricRequest->Format;
+        $biometricXml = $biometricRequest->BiometricXml;
+        $token = $biometricRequest->Token;
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => $this->_apiBaseUrl . "api/Biometric/Verify",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "POST",
+        CURLOPT_POSTFIELDS => "{\r\n  \"CustomerKey\": \"$customerKey\",\r\n  \"EngineName\": \"$engineName\",\r\n  \"RegistrationID\": \"$registrationid\",\r\n  \"Format\": \"$format\",\r\n  \"BiometricXml\": \"$biometricXml\"\r\n}",
+        CURLOPT_HTTPHEADER => array(
+            "authorization: Bearer $token",
+            "cache-control: no-cache",
+            "content-type: application/json",
+            "postman-token: fc270662-9e46-7308-3851-f86ea8a66430"
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            echo $response;
+        }
+    }
 }
