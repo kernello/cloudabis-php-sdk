@@ -163,7 +163,7 @@ class CloudABISAPI {
         $engineName = $biometricRequest->EngineName;
         $customerKey = $biometricRequest->CustomerKey;
         $format = $biometricRequest->Format;
-        $biometricXml = $biometricRequest->BiometricXml;
+        $biometricXml = $this->FormatTemplateXML($biometricRequest->BiometricXml);
         $token = $biometricRequest->Token;
 
         $curl = curl_init();
@@ -235,7 +235,7 @@ class CloudABISAPI {
         $engineName = $biometricRequest->EngineName;
         $customerKey = $biometricRequest->CustomerKey;
         $format = $biometricRequest->Format;
-        $biometricXml = $biometricRequest->BiometricXml;
+        $biometricXml = $this->FormatTemplateXML($biometricRequest->BiometricXml);
         $token = $biometricRequest->Token;
 
         $curl = curl_init();
@@ -309,7 +309,7 @@ class CloudABISAPI {
         $engineName = $biometricRequest->EngineName;
         $customerKey = $biometricRequest->CustomerKey;
         $format = $biometricRequest->Format;
-        $biometricXml = $biometricRequest->BiometricXml;
+        $biometricXml = $this->FormatTemplateXML($biometricRequest->BiometricXml);
         $token = $biometricRequest->Token;
 
         $curl = curl_init();
@@ -501,7 +501,7 @@ class CloudABISAPI {
         $engineName = $biometricRequest->EngineName;
         $customerKey = $biometricRequest->CustomerKey;
         $format = $biometricRequest->Format;
-        $biometricXml = $biometricRequest->BiometricXml;
+        $biometricXml = $this->FormatTemplateXML($biometricRequest->BiometricXml);
         $token = $biometricRequest->Token;
 
         $curl = curl_init();
@@ -533,5 +533,14 @@ class CloudABISAPI {
         } else {
             return $response;
         }
+    }
+	public function FormatTemplateXML($template)
+    {
+        $templateXML = str_replace('&lt', '<', $template);
+        $templateXML = str_replace('%20', ' ', $templateXML);
+        $templateXML = str_replace('%5C&quot', '\"', $templateXML);
+        $templateXML = str_replace('&gt', '>', $templateXML);
+
+        return $templateXML;
     }
 }
