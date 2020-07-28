@@ -229,4 +229,31 @@ class CloudABISConstant{
     /// RemoveID API Path
     /// </summary>
     public const CLOUDABIS_REMOVEID_API_PATH = "api/Biometric/RemoveID";
+
+    
+     /// <summary>
+    /// 
+    /// </summary>
+    public const HTTP_STATUS_200 = 200;
+    public const HTTP_STATUS_200_MESSAGE = "Request is successful.";
+     /// <summary>
+    /// 
+    /// </summary>
+    public const HTTP_STATUS_401 = 401;
+    public const HTTP_STATUS_401_MESSAGE = "UnAuthorized. Please re-collet token and try again.";
+     /// <summary>
+    /// 
+    /// </summary>
+    public const HTTP_STATUS_404 = 404;
+    public const HTTP_STATUS_404_MESSAGE = "Server not found. Please check your matching server credentials.";
+     /// <summary>
+    /// 
+    /// </summary>
+    public const HTTP_STATUS_503 = 503;
+    public const HTTP_STATUS_503_MESSAGE = "Server is unavailable. Please try after sometime.";
+     /// <summary>
+    /// 
+    /// </summary>
+    public const HTTP_STATUS_502 = 502;
+    public const HTTP_STATUS_502_MESSAGE = "Bad Gateway.";
 }
