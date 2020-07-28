@@ -72,4 +72,28 @@ class CloudABISResponseParser{
         }
         return $detailsMessage;
     }
+
+    public static function GetErrorMessage($httpsStatusCode)
+    {
+        $detailsMessage = "";
+        switch ($httpsStatusCode)
+        {
+            case CloudABISConstant::HTTP_STATUS_401:
+                $detailsMessage = CloudABISConstant::HTTP_STATUS_401_MESSAGE;
+            break;
+            case CloudABISConstant::HTTP_STATUS_404:
+                $detailsMessage = CloudABISConstant::HTTP_STATUS_404_MESSAGE;
+            break;
+            case CloudABISConstant::HTTP_STATUS_503:
+                $detailsMessage = CloudABISConstant::HTTP_STATUS_503_MESSAGE;
+            break;
+            case CloudABISConstant::HTTP_STATUS_502:
+                $detailsMessage = CloudABISConstant::HTTP_STATUS_502_MESSAGE;
+            break;
+            default:
+            $detailsMessage = $httpsStatusCode;
+        break;
+        }
+        return $detailsMessage;
+    }
 }

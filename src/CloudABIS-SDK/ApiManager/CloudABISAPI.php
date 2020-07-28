@@ -1,6 +1,7 @@
 <?php 
 namespace cloudabis_sdk\ApiManager;
 
+
 /**
  * API Manager
  */
@@ -51,9 +52,9 @@ class CloudABISAPI {
 
             $response = curl_exec($curl);
             $err = curl_error($curl);
-
+            $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
             curl_close($curl);
-
+    
             if ($err) {
                 return "cURL Error #:" . $err;
             } else {
@@ -112,13 +113,13 @@ class CloudABISAPI {
 
         $response = curl_exec($curl);
         $err = curl_error($curl);
-
+        $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         curl_close($curl);
 
         if ($err) {
-            return "cURL Error #:" . $err;
+            return array($httpcode,$err);
         } else {
-            return $response;
+            return array($httpcode,json_decode($response));
         }
     }
 
@@ -187,13 +188,13 @@ class CloudABISAPI {
 
         $response = curl_exec($curl);
         $err = curl_error($curl);
-
+        $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         curl_close($curl);
 
         if ($err) {
-            return "cURL Error #:" . $err;
+            return array($httpcode,$err);
         } else {
-            return $response;
+            return array($httpcode,json_decode($response));
         }
     }
 
@@ -259,13 +260,13 @@ class CloudABISAPI {
 
         $response = curl_exec($curl);
         $err = curl_error($curl);
-
+        $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         curl_close($curl);
 
         if ($err) {
-            return "cURL Error #:" . $err;
+            return array($httpcode,$err);
         } else {
-            return $response;
+            return array($httpcode,json_decode($response));
         }
     }
 
@@ -333,13 +334,13 @@ class CloudABISAPI {
 
         $response = curl_exec($curl);
         $err = curl_error($curl);
-
+        $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         curl_close($curl);
 
         if ($err) {
-            return "cURL Error #:" . $err;
+            return array($httpcode,$err);
         } else {
-            return $response;
+            return array($httpcode,json_decode($response));
         }
     }
 
@@ -393,13 +394,13 @@ class CloudABISAPI {
 
         $response = curl_exec($curl);
         $err = curl_error($curl);
-
+        $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         curl_close($curl);
 
         if ($err) {
-            return "cURL Error #:" . $err;
+            return array($httpcode,$err);
         } else {
-            return $response;
+            return array($httpcode,json_decode($response));
         }
     }
 
@@ -450,13 +451,13 @@ class CloudABISAPI {
 
         $response = curl_exec($curl);
         $err = curl_error($curl);
-
+        $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         curl_close($curl);
 
         if ($err) {
-            return "cURL Error #:" . $err;
+            return array($httpcode,$err);
         } else {
-            return $response;
+            return array($httpcode,json_decode($response));
         }
     }
 
@@ -525,13 +526,13 @@ class CloudABISAPI {
 
         $response = curl_exec($curl);
         $err = curl_error($curl);
-
+        $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         curl_close($curl);
 
         if ($err) {
-            return "cURL Error #:" . $err;
+            return array($httpcode,$err);
         } else {
-            return $response;
+            return array($httpcode,json_decode($response));
         }
     }
 	public function FormatTemplateXML($template)

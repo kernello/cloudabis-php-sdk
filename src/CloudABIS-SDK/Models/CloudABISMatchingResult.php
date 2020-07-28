@@ -4,12 +4,29 @@ namespace cloudabis_sdk\Models;
 class CloudABISResponse{
     public $CustomerID;
     public $OperationResult;
-    public $_operationName;
-    public $_opStatus;
+    public $OperationName;
+    public $OpStatus;
     public $MatchCount;
     public $BestResult;
     public $DetailResult;
+    public $ResponseCode;
+    public $Message;
 
+
+     /// <summary>
+    /// API Response Code
+    /// </summary>
+    public function getResponseCode()
+    {
+        return $this->ResponseCode;
+    }
+    /// <summary>
+    /// API Response Message if any error occured
+    /// </summary>
+    public function getMessage()
+    {
+        return $this->Message;
+    }
     /// <summary>
     /// Customer Key that was used to make the request.
     /// </summary>
@@ -28,7 +45,7 @@ class CloudABISResponse{
     /// </summary>
     public function getOperationName()
     {
-        return $this->_operationName;
+        return $this->OperationName;
     }
 
     public function setOperationName(EnumOperationName $OperationName)
@@ -41,7 +58,7 @@ class CloudABISResponse{
     /// </summary>
     public function getOperationStatus()
     {
-        return $this->_opStatus;
+        return $this->OpStatus;
     }
 
     public function setOperationStatus(EnumOperationStatus $OperationStatus)
